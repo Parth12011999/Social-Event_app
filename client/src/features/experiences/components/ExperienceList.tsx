@@ -12,8 +12,6 @@ const ExperienceList = ({
   isLoading,
   noExperiencesMessage = "No experiences found",
 }: ExperienceListProps) => {
-  console.log("ExperienceList", experiences, isLoading);
-
   return (
     <div className="space-y-4">
       {experiences.map((experience) => (
