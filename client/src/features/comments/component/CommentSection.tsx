@@ -1,7 +1,8 @@
-import { trpc } from "@/trpc";
+import { trpc } from "@/router";
 import { Experience } from "@advanced-react/server/database/schema";
 import CommentList from "./CommentList";
 import CommentCreateForm from "./CommentCreateForm";
+import { ErrorComponent } from "@/features/shared/components/ErrorComponent";
 
 type CommentSectionProps = {
   experienceId: Experience["id"];
@@ -21,7 +22,7 @@ const CommentSection = ({
   );
 
   if (commentsQuery.error) {
-    return <div>Something went wrong</div>;
+    return <ErrorComponent/>;
   }
 
   return (
