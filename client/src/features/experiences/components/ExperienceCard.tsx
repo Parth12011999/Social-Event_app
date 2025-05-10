@@ -3,6 +3,7 @@ import Card from "@/features/shared/components/ui/Card";
 import Link from "@/features/shared/components/ui/Link";
 import { LinkIcon, MessageSquare } from "lucide-react";
 import { ExperienceForList } from "../types";
+import { UserAvatar } from "@/features/users/components/UserAvatar";
 
 type ExperienceCardProps = {
   experience: ExperienceForList;
@@ -11,12 +12,14 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
   return (
     <Card className="overflow-hidden p-0">
       <ExperienceCardMedia experience={experience} />
-      <div className="w-full space-y-4 p-4">
-        <ExperienceCardHeader experience={experience} />
-        <ExperienceCardContent experience={experience} />
-        <ExperienceCardMeta experience={experience} />
-        <ExperienceCardMetricButtons experience={experience} />
-
+      <div className="flex items-start gap-4 p-4">
+        <ExperienceCardAvatar experience={experience} />
+        <div className="w-full space-y-4">
+          <ExperienceCardHeader experience={experience} />
+          <ExperienceCardContent experience={experience} />
+          <ExperienceCardMeta experience={experience} />
+          <ExperienceCardMetricButtons experience={experience} />
+        </div>
       </div>
     </Card>
   );
@@ -38,11 +41,30 @@ const ExperienceCardMedia = ({ experience }: ExperienceCardMediaProps) => {
   );
 };
 
+type ExperienceCardAvatarProps = Pick<ExperienceCardProps, "experience">;
+const ExperienceCardAvatar = ({ experience }: ExperienceCardAvatarProps) => {
+  return (
+    <Link
+      to={`/users/$userId`}
+      params={{ userId: experience.user.id }}
+      variant={"ghost"}
+    >
+      <UserAvatar user={experience.user} showName={false} />{" "}
+    </Link>
+  );
+};
+
 type ExperienceCardHeaderProps = Pick<ExperienceCardProps, "experience">;
 const ExperienceCardHeader = ({ experience }: ExperienceCardHeaderProps) => {
   return (
     <div>
-      <div>{experience.user.name}</div>
+      <Link
+        to={`/users/$userId`}
+        params={{ userId: experience.user.id }}
+        variant={"ghost"}
+      >
+        <div>{experience.user.name}</div>
+      </Link>
       <Link
         to="/experiences/$experienceId"
         params={{ experienceId: experience.id }}

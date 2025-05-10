@@ -16,7 +16,7 @@ function Root() {
   return (
         <ThemeProvider defaultTheme="dark">
           <Toaster />
-          <div className="flex justify-center gap-8 pb-8">
+          <div className="flex justify-center gap-8 pb-8 relative">
             <Navbar />
             <div className="min-h-screen w-full max-w-2xl">
               <header className="mb-4 border-b border-neutral-200 p-4 dark:border-neutral-800">
